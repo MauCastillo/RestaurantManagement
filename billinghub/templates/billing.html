@@ -1,0 +1,61 @@
+<!-- templates/billing.html -->
+{% extends 'base.html' %}
+
+{% block title %}Facturacion{% endblock %}
+
+{% block content %}
+  <div class="countainer">
+    <div class="row">
+
+      <div class="col btn btn-light">
+        <a href="{% url 'factura' %}" >
+          <div class="row">
+            <div class="col">
+              <img src="https://res.cloudinary.com/dd7j5cf6d/image/upload/v1670770890/restaurantManager/membership.png" class="img-rounded" alt="Ventas" width="256" height="256"> 
+            </div>
+            <div class="row">
+              <h2>Nueva venta</h2>
+              </div>
+            </div>
+        </a>
+      </div>
+      <div class="col btn btn-light">
+        <a href="{% url 'cliente' %}" >
+          <div class="row">
+            <div class="col">
+              <img src="https://res.cloudinary.com/dd7j5cf6d/image/upload/v1670778748/restaurantManager/compras.png" class="img-rounded" alt="nuevo cliente" width="256" height="256"> 
+            </div>
+            <div class="row">
+              <h2>Agregar un cliente</h2>
+              </div>
+            </div>
+        </a>
+      </div>
+      <div class="col btn btn-light">
+        <a href="{% url 'registro_ventas' %}" >
+          <div class="row">
+            <div class="col">
+              <img src="https://res.cloudinary.com/dd7j5cf6d/image/upload/v1670786371/restaurantManager/fecha-limite.png" class="img-rounded" alt="nuevo cliente" width="256" height="256"> 
+            </div>
+            <div class="row">
+              <h2>Registros de ventas</h2>
+              </div>
+            </div>
+        </a>
+      </div>
+
+      <div class="col btn btn-light">
+        <a href="{% url 'cuenta_final' %}" >
+        <div class="row">
+          <div class="col"> 
+          <img src="https://res.cloudinary.com/dd7j5cf6d/image/upload/v1670770890/restaurantManager/sales.png" class="img-rounded" alt="Direcciones" width="256" height="256"> 
+          </div>
+          <div class="row">
+            <h2>Cuenta final</h2>
+          </div>
+       </div>
+      </div>
+    </a>
+    </div>
+  </div>
+{% endblock %}

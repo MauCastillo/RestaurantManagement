@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Facturacion{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h2>{{title_form}}</h2>
+        <form method="POST" class="post-form">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form|crispy}}
+                {% if date == True %}
+                <label for="birthday">Fecha:</label>
+                <input type="date" id="bill_date" name="bill_date" value="{{last_date}}">
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-outline-success">Guardar</button>
+        </form>
+    </div>
+</div>
+
+{% if saved == True %}
+<script>
+    document.addEventListener("DOMContentLoaded", function(event){
+        $("#id_price").val(0)
+        $("#id_last_name").val("")
+        $("#id_first_name").val("")
+        $("#id_document").val(0)
+        Swal.fire({
+            position: 'top-end',
+            icon: '{{type}}',
+            title: '{{message}}',
+            showConfirmButton: false,
+            timer: 1500
+        })
+      });
+</script>
+{% endif %}
+{% endblock %}
