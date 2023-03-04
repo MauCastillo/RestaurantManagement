@@ -27,23 +27,26 @@ def registro_ventas(request):
     if request.method == "POST" and request.POST.get('start_date') != "":
         bills = Bill.objects.filter(bill_date__range=[request.POST.get('start_date'), request.POST.get('end_date')])
         if len(bills) == 0:
-            return render(request, 'generic_form_table.html', {'bills': {}, 'title_form': "Registro de ventas",'saved': True,'message': "No hay registro en este rango de fechas", 'type':"warning"})
-        print(bills)
+            return render(request, 'generic_form_table.html', {'bills': {}, 'title_form': "Tabla de registro de ventas",'saved': True,'message': "No hay registro en este rango de fechas", 'type':"warning"})
+
         descripcion =  "Consultado desde: %s Hasta %s" %(request.POST.get('start_date'), request.POST.get('end_date'))
-        return render(request, 'generic_form_table.html', {'bills': bills, 'title_form': "Registro de ventas",'saved': True,'type': "success", 'message': "Todo salio bien!", 'type':"success", 'table_description': descripcion})
+        return render(request, 'generic_form_table.html', {'bills': bills, 'title_form': "Tabla de registro de ventas",'saved': True,'type': "success", 'message': "Todo salio bien!", 'type':"success", 'table_description': descripcion})
         
-    return render(request, 'generic_form_table.html', {'bills': {}, 'title_form': "Registro de ventas",'saved': False, 'message': ""})
+    return render(request, 'generic_form_table.html', {'bills': {}, 'title_form': "Tabla de registro de ventas",'saved': False, 'message': ""})
 
 def cuenta_final(request):
     if request.method == "POST" and request.POST.get('start_date') != "":
         bills = Bill.objects.values('client').order_by('client').annotate(total_price=Sum('price')).filter(bill_date__range=[request.POST.get('start_date'), request.POST.get('end_date')]).values(last_name=F('client__last_name'), first_name=F('client__first_name'),document=F('client__document'), price=F('total_price'))
     
-        # objects.filter(bill_date__range=[request.POST.get('start_date'), request.POST.get('end_date')])
         if len(bills) == 0:
             return render(request, 'generic_form_table_list.html', {'bills': {}, 'title_form': "Cuenta final",'saved': True,'message': "No hay registro en este rango de fechas", 'type':"warning"})
-        print(bills)
         descripcion =  "Consultado desde: %s Hasta %s" %(request.POST.get('start_date'), request.POST.get('end_date'))
-        return render(request, 'generic_form_table_list.html', {'bills': bills, 'title_form': "Cuenta final",'saved': True,'type': "success", 'message': "Todo salio bien!", 'type':"success", 'table_description': descripcion})
+        
+        valueTotal = 0
+        for record in list(bills):
+            valueTotal += int(record['price'])
+             
+        return render(request, 'generic_form_table_list.html', {'value_total': valueTotal,'bills': bills, 'title_form': "Cuenta final",'saved': True,'type': "success", 'message': "Todo salio bien!", 'type':"success", 'table_description': descripcion})
         
     return render(request, 'generic_form_table_list.html', {'bills': {}, 'title_form': "Cuenta final",'saved': False, 'message': ""})
 

@@ -15,7 +15,7 @@ class Client(models.Model):
     )
     
     def __str__(self):
-        return self.first_name
+        return "%s %s" % (self.first_name, self.last_name)
 
 class Bill(models.Model):
     class Meta:
