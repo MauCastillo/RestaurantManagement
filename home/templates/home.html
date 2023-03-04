@@ -1,0 +1,54 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <div class="countainer">
+    <div class="row">
+
+      
+        <div class="col btn btn-light">
+          <a href="{% url 'billing' %}" >
+          <div class="row">
+            <div class="col">
+              <img src="https://res.cloudinary.com/dd7j5cf6d/image/upload/v1670766998/restaurantManager/bill.png" class="img-rounded" alt="Cuenta de cobre" width="256" height="256"> 
+            </div>
+            <div class="row">
+              <div class="col text-center">
+                <h2>Facturación</h2>
+              </div>
+              </div>
+            </div>
+          </a>
+        </div>
+    
+      <div class="col btn btn-light"> 
+        <div class="row">
+          <div class="col"> 
+          <img src="https://res.cloudinary.com/dd7j5cf6d/image/upload/v1670766998/restaurantManager/delivery-man.png" class="img-rounded" alt="Direcciones" width="256" height="256"> 
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <h2>Direcciones de clientes</h2>
+           </div>
+          </div>
+       </div>
+      </div>
+
+      <div class="col btn btn-light"> 
+        <div class="row">
+          <div class="col"> 
+          <img src="https://res.cloudinary.com/dd7j5cf6d/image/upload/v1670766998/restaurantManager/take-away.png" class="img-rounded" alt="Tomar Pedido" width="256" height="256"> 
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <h2>Tomar Pedidos</h2>
+            </div>
+          </div>
+       </div>
+      </div>
+
+    </div>
+  </div>
+{% endblock %}

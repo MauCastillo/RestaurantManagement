@@ -1,0 +1,16 @@
+{% extends '../base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row">
+  <div class="col">
+  <h2>Inicia Sesion!</h2>
+  <form method="POST">
+    <div class="form-group">
+    {% csrf_token %}
+    {{ form|crispy}}
+    <button type="submit" class="btn btn-link">Iniciar sesion</button>
+    </div>
+  </form>
+  </div>
+</div>
+{% endblock %}

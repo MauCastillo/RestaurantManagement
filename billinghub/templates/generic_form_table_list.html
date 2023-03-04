@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Consulta{% endblock %}
+{% block content %}
+
+    <div class="content container">
+        <div class="row">
+            <div class="col-sm">
+                <h2>{{title_form}}</h2>
+                <form method="POST" class="row g-3">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Fecha de Inicio</label>
+                        <input type="date" class="form-control" id="id_start_date" name="start_date">
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Fecha Finalizacion</label>
+                        <input type="date" class="form-control" id="id_end_date" name="end_date">
+                      </div>
+                    <button type="submit" class="btn btn-outline-success">Consultar</button>
+                </form>
+            </div>
+        <div class="row">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>{{table_description}}</h2>
+                </div>
+            </div>
+            <div class="col-md">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cedula</th>
+                        <th scope="col">Porceso de Desempeno</th>
+                        <th scope="col">Valor a Descontar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for record in bills %}
+                      <tr>
+                        <th scope="row">{{ forloop.counter }} </th>
+                        <td>{{ record.first_name }} {{ record.last_name }}</td>
+                        <td>{{record.document}}</td>
+                        <td>Pool de Ambulancia</td>
+                        <td>{{record.price}}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  <h3>Costo de La Factura: {{value_total}}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if saved == True %}
+<script>
+    document.addEventListener("DOMContentLoaded", function(event){
+        Swal.fire({
+            position: 'top-end',
+            icon: '{{type}}',
+            title: '{{message}}',
+            showConfirmButton: false,
+            timer: 1500
+        })
+      });
+</script>
+{% endif %}
+{% endblock %}
